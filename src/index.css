@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    --bg-main: #e0f2fe;
+    --bg-card: #f0f9ff;
+    --bg-accent: #bae6fd;
+    --text-main: #0c4a6e;
+    --text-muted: rgba(12, 74, 110, 0.4);
+    --border-color: rgba(12, 74, 110, 0.1);
+    --nav-bg: rgba(240, 249, 255, 0.85);
+    --primary: #0369a1;
+    --primary-foreground: #ffffff;
+    --grid-color: rgba(3, 105, 161, 0.05);
+  }
+
+  .dark {
+    --bg-main: #020617;
+    --bg-card: #0f172a;
+    --bg-accent: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: rgba(241, 245, 249, 0.4);
+    --border-color: rgba(241, 245, 249, 0.1);
+    --nav-bg: rgba(2, 6, 23, 0.85);
+    --primary: #38bdf8;
+    --primary-foreground: #020617;
+    --grid-color: rgba(56, 189, 248, 0.05);
+  }
+
+  body {
+    @apply font-sans antialiased selection:bg-[#0369a1] selection:text-white transition-colors duration-500;
+    color: var(--text-main);
+    background-color: var(--bg-main);
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(3, 105, 161, 0.05), transparent 70%),
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
+}
+
+@layer components {
+  .mobile-container {
+    @apply relative mx-auto h-[100dvh] w-full max-w-md overflow-hidden bg-[var(--bg-card)] shadow-[0_0_80px_rgba(0,0,0,0.1)] md:h-[844px] md:rounded-[48px] md:border-[12px] md:border-[#1a1a1a] transition-all duration-500;
+  }
+
+  .dark .mobile-container {
+    @apply shadow-[0_0_80px_rgba(0,0,0,0.4)] md:border-[#1f1f1f];
+  }
+
+  .glass-nav {
+    @apply border-t border-[var(--border-color)] bg-[var(--nav-bg)] backdrop-blur-md transition-colors duration-300;
+  }
+
+  .arch-card {
+    @apply relative overflow-hidden rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#c0a080]/30;
+  }
+
+  .btn-primary {
+    @apply flex items-center justify-center rounded-full bg-[var(--primary)] px-6 py-3 text-sm font-medium text-[var(--primary-foreground)] transition-transform active:scale-95;
+  }
+
+  /* Markdown Styles */
+  .prose-markdown {
+    @apply space-y-4;
+  }
+  .prose-markdown h1, .prose-markdown h2, .prose-markdown h3 {
+    @apply font-serif italic font-bold my-2;
+  }
+  .prose-markdown ul {
+    @apply list-disc pl-4 space-y-1;
+  }
+  .prose-markdown ol {
+    @apply list-decimal pl-4 space-y-1;
+  }
+  .prose-markdown p {
+    @apply mb-2 text-[var(--text-main)]/80;
+  }
+  .prose-markdown strong {
+    @apply font-bold text-[var(--text-main)];
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 10px;
+}
